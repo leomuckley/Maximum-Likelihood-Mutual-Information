@@ -1,9 +1,9 @@
-# maximum-likelihood-mutual-information
+# Maximum Likelihood Mutual Information
 Python code to estimate mutual information between variables using a maximum likelihood approach.
 
-##Mutual information approximation via maximum likelihood estimation of density ratio
+## Mutual information approximation via maximum likelihood estimation of density ratio
 
-###Abstract:
+### Abstract:
 We propose a new method of approximating mutual information based on maximum likelihood estimation of a density ratio function.
 The proposed method, Maximum Likelihood Mutual Information (MLMI), possesses useful properties, e.g., it does not involve density estimation, 
 the global optimal solution can be efficiently computed, it has suitable convergence properties, 
