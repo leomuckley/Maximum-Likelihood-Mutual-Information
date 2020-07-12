@@ -3,7 +3,7 @@ Python code to estimate mutual information between variables using a maximum lik
 
 ## Mutual information approximation via maximum likelihood estimation of density ratio 
 ---
-*Taiji Suzuki* ; *Masashi Sugiyama* ; *Toshiyuki Tanaka*
+Authors: *Taiji Suzuki* ; *Masashi Sugiyama* ; *Toshiyuki Tanaka*
 
 
 ### Abstract:
