@@ -14,3 +14,22 @@ and model selection criteria are available.
 Numerical experiments show that MLMI compares favorably with existing methods.
 
 https://ieeexplore.ieee.org/abstract/document/5205712
+
+
+**Example**
+
+``` python
+for i in range(10, 1010, 10):
+        mi = MutualInfo(dim=1, corr=(0.8,1.0), cond=(10,10), nsamples=i, seed=SEED)
+        data_x, data_y, MI, params = mi.true_mutual_info()
+        mlmi = MLMI(data_x, data_y)
+        MI_hat = np.round(mlmi.predict(), 4)
+        err = np.round(np.abs(MI - MI_hat), 2)
+        err_list.append((i,err))
+
+# Plot approximation error
+plt.plot(*zip(*err_list))plt.title("Mutual Information Estimation Error")
+plt.xlabel("Number of samples")
+plt.ylabel("Mean estimation error")
+plt.show()
+```
