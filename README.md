@@ -33,3 +33,5 @@ plt.xlabel("Number of samples")
 plt.ylabel("Mean estimation error")
 plt.show()
 ```
+
+![Tux, the Linux mascot](/mlmi_example.png)
