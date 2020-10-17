@@ -48,43 +48,33 @@ class Gaussian():
 
         
     
-    def generate_example(self, dim=10, nsamples=500, rhoz_lims=(0, 1), cond_numbers=(10, 10)):
+    def generate_example(self, dim=10, n_samples=500, rhoz_lims=(0, 1), cond=(10, 10)):
             
-    	"""	Samples from a multivariate Gaussian and computes the (true) value of the mutual information
-    
-    	Sampling is performed by first generating random variables zx and zy with cov(zx)=cov(zy)=eye,
-    	and cov(zx,zy) = diag(rho) where abs(rho) is sampled from a uniform distribution with limits given
-    	by rhoz_lims, with its sign randomised.
-    	This is followed by linearly transforming zx and zy so that each has covariance matrix
-    	sigma_xx and sigma_yy respectively. The target conditioning numbers for sigma_xx and sigma_yy is set by
-    	the argument cond_numbers.
-    
-    	The mutual information between x and y is
-    	MI = -0.5 \sum_{k=1}^dim log(1-rho_k^2)
-    	The mutual information increases as dim increases and as rho^2 becomes close to one.
+    	"""	
+        Sampling from a multivariate Gaussian distribution and calculates the true mutual information value.
     
     	Parameters
     	----------
-    	dim: int
-    	    dimension of x and y (assumed to be the same)
-    	nsamples: int
-    	    number of samples to generate
-    	rhoz_lims: tuple
-    	    interval (a,b) on which to sample the absolute value of the correlation coefficients
-    	    0<a<b<1. Setting a and b close to 1 generates data with large mutual information.
-    	cond_numbers: tuple
-    	    target conditioning numbers for the covariance matrices of x and y
+    	dim         : int
+    	              dimension of x and y (should be equivalent)
+    	n_samples   : int
+    	              number of samples to generate
+    	rhoz_lims   : tuple
+    	              interval (a,b) on which to sample the absolute value of the correlation coefficients
+    	              0<a<b<1. Setting a and b close to 1 generates data with large mutual information.
+    	cond        : tuple
+    	              target conditioning numbers for the covariance matrices of x and y
     
     	Returns
     	-------
-    	data_x: ndarray
-    	    generated data set for x (dim \times nsamples),
-    	data_y: ndarray
-    	    generated data set for y (dim \times nsamples),
-    	MI: float
-    	    the mutual information value between x and y
-    	gen_params: dict
-    	    dictionary with fields sigma_xx, sigma_yy, rhoz
+    	data_x      : array, shape=(n,dim)
+    	              generated data set for x 
+    	data_y      : array, shape=(n,dim)
+    	              generated data set for y 
+    	MI          : float
+    	              the true mutual information value between x and y
+    	gen_params  : dict
+    	              dictionary of sigma_xx, sigma_yy, rhoz
     
     	"""
                    
@@ -100,10 +90,10 @@ class Gaussian():
     	zy = rhoz.T*zx.T+np.sqrt(1-rhoz.T**2)*np.random.normal(loc=0, scale=1, size=(nsamples, dim))
     	zy = zy.T
     
-    	sigma_xx, spectrum_xx, eigenvectors_xx = self.sample_cov_matrix(dim, cond_numbers[0])
+    	sigma_xx, spectrum_xx, eigenvectors_xx = self.sample_cov_matrix(dim, cond[0])
     	data_x = eigenvectors_xx @ np.diag(np.sqrt(spectrum_xx)) @ zx
     
-    	sigma_yy, spectrum_yy, eigenvectors_yy = self.sample_cov_matrix(dim, cond_numbers[1])
+    	sigma_yy, spectrum_yy, eigenvectors_yy = self.sample_cov_matrix(dim, cond[1])
     	data_y = eigenvectors_yy @ np.diag(np.sqrt(spectrum_yy)) @ zy
     
     	# return
@@ -111,7 +101,7 @@ class Gaussian():
     	return data_x, data_y, MI, gen_params
     
     
-    def sample_cov_matrix(self, dim, cond_number):
+    def sample_cov_matrix(self, dim, cond):
     
     	""" generate a covariance matrix of size dim x dim
     
