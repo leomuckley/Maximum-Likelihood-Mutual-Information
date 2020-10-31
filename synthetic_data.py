@@ -86,8 +86,8 @@ class Gaussian():
     	MI = -0.5*np.sum(np.log(1-rhoz**2))
     
     	# generate data
-    	zx = np.random.normal(loc=0, scale=1, size=(dim, nsamples))
-    	zy = rhoz.T*zx.T+np.sqrt(1-rhoz.T**2)*np.random.normal(loc=0, scale=1, size=(nsamples, dim))
+    	zx = np.random.normal(loc=0, scale=1, size=(dim, n_samples))
+    	zy = rhoz.T*zx.T+np.sqrt(1-rhoz.T**2)*np.random.normal(loc=0, scale=1, size=(n_samples, dim))
     	zy = zy.T
     
     	sigma_xx, spectrum_xx, eigenvectors_xx = self.sample_cov_matrix(dim, cond[0])
@@ -124,7 +124,7 @@ class Gaussian():
     	"""
         
     	# generate spectrum (so that covariance matrix has approximately the target conditioning number)
-    	spectrum = np.random.uniform(low=1, high=cond_number, size=(dim,))
+    	spectrum = np.random.uniform(low=1, high=cond, size=(dim,))
     	spectrum = -np.sort(-spectrum)
     
     	# generate rotation matrix
