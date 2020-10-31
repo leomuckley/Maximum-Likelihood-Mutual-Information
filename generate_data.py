@@ -1,15 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 17 10:18:01 2019
-
-@author: s1876102
-"""
+import numpy as np
 import matplotlib.pyplot as plt
-
 from synthetic_data import Gaussian
 
-import numpy as np
 
 
 class MutualInfo():
