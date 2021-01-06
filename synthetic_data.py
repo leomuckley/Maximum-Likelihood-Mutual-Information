@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 12 17:21:42 2020
-
-@author: leo
-"""
 
 """
 
@@ -38,7 +33,7 @@ See the docstring of ''gaussian_example'' for further information.
 """
 
 import numpy as np
-from scipy import linalg as la
+from scipy import linalg
 
 
 class Gaussian():
@@ -133,7 +128,7 @@ class Gaussian():
     	while mini < 0:
     		M = np.random.normal(loc=0, scale=1, size=(dim, dim))
     		M = M @ M.T
-    		dummy_spectrum, eigenvectors = la.eigh(M)
+    		dummy_spectrum, eigenvectors = linalg.eigh(M)
     		mini = dummy_spectrum.min()
     
     	# generate covariance matrix
@@ -170,9 +165,9 @@ class Gaussian():
     	sigma_xy = cov_matrix[:dim, dim:]
     	sigma_yy = cov_matrix[dim:, dim:]
     
-    	Bxy = la.inv(sigma_xx)@sigma_xy
-    	Byx = la.inv(sigma_yy)@sigma_xy.T
-    	MI = -0.5*np.log(la.det(np.eye(dim) - Bxy@Byx))
+    	Bxy = linalg.inv(sigma_xx)@sigma_xy
+    	Byx = linalg.inv(sigma_yy)@sigma_xy.T
+    	MI = -0.5*np.log(linalg.det(np.eye(dim) - Bxy@Byx))
     
     	return MI
     
