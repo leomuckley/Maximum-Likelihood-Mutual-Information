@@ -1,4 +1,4 @@
-# A Python Package for Maximum Likelihood Mutual Information Estimation
+# A Python implementation for Maximum Likelihood Mutual Information Estimation
 Python code to estimate mutual information between variables using a maximum likelihood approach.
 
 ## Mutual information approximation via maximum likelihood estimation of density ratio 
